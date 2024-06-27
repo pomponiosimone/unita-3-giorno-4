@@ -1,10 +1,11 @@
-import { Component } from 'react'
-import { Card } from 'react-bootstrap'
+import React, { Component } from 'react';
+import { Card } from 'react-bootstrap';
+import CommentArea from './CommentArea';
 
 class SingleBook extends Component {
   state = {
     selected: false,
-  }
+  };
 
   render() {
     return (
@@ -18,9 +19,10 @@ class SingleBook extends Component {
             {this.props.book.title}
           </Card.Title>
         </Card.Body>
+        {this.state.selected && <CommentArea bookId={this.props.book.id} />}
       </Card>
-    )
+    );
   }
 }
 
-export default SingleBook
+export default SingleBook;
