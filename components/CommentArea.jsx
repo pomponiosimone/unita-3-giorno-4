@@ -11,9 +11,15 @@ class CommentArea extends Component {
     this.fetchComments();
   }
 
+  componentDidUpdate(prevProps) {
+    if (this.props.asin !== prevProps.asin) {
+      this.fetchComments();
+    }
+  }
+
   fetchComments = async () => {
     try {
-      const response = await fetch(`https://api.example.com/books/${this.props.bookId}/comments`);
+      const response = await fetch(`https://api.example.com/books/${this.props.asin}/comments`);
       if (response.ok) {
         const data = await response.json();
         this.setState({ comments: data });
@@ -35,7 +41,7 @@ class CommentArea extends Component {
     return (
       <div>
         <CommentsList comments={this.state.comments} />
-        <AddComment bookId={this.props.bookId} onCommentAdded={this.addComment} />
+        <AddComment bookId={this.props.asin} onCommentAdded={this.addComment} />
       </div>
     );
   }
